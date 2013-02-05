@@ -45,7 +45,7 @@ Available URL query parameters (all compulsory):
 
 ##### Response
 
-** HTTP /1.1 OK **
+**HTTP /1.1 OK**
 
 ...javascript
 {
