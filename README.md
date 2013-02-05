@@ -47,7 +47,7 @@ Available URL query parameters (all compulsory):
 
 **HTTP /1.1 OK**
 
-...javascript
+```javascript
 {
 "customer_id":"2",
 "customer_name":"",
@@ -65,4 +65,4 @@ Available URL query parameters (all compulsory):
             "time":"1354893907"},
 "request":"GET"
 }
-...
+```
