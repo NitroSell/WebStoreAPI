@@ -11,7 +11,7 @@ The API enables Web developers to integrate with retailers' Webstores to allow o
 *     __GetShippingOptions__: this endpoint allows you to query the list of possible shipping options of a given basket;
 *     __GetTaxForAnOrder__: this endpoint allows to get the applicable amount of tax for a given basket;
 *     __GetShippingAndTaxForAnOrder__: this endpoint is an aggregation of the previous two endpoints; it returns the applicable tax and the shipping options for a given basket;
-*     __InsertWebOrders__: this endpoint allows you to insert a given order into the WebStore.
+*     __InsertWebOrder__: this endpoint allows you to insert a given order into the WebStore.
 
 
 ### Retrieve the details of a given customer
@@ -393,5 +393,304 @@ Available URL query parameters (all compulsory)
     "userid":"50c2080e091f9"
 },
 "request":"POST"
+}
+```
+
+
+### Retrieve the amount of tax applicable to a given order 
+
+The following table summarises the list of parameters for this endpoint
+
+Table 6: **GetTaxForAnOrder** Request Fields
+
+| Field Name    | Data Type     | Usage | Description |
+| ------------- |:-------------:| ----- |:-----------:|
+| __hash__      | String        | Required | Please refer to the description provided in Table 1|
+| __userid__    | String        | Required | Please refer to the description provided in Table 1|
+| __time__      | Integer       | Required | Please refer to the description provided in Table 1|
+| __email__   | String        | Required | This is the email address of the customer you are looking for|
+| __ship-firstname__ | String      | Required | This is the first name that appears on the shipping address |
+| __ship-lastname__ | String      | Required | This is the last name that appears on the shipping address |
+| __ship-fullname__ | String      | Required | This is the full name that appears on the shipping address |
+| __ship-company__ | String      | Required | This is the company name that appears on the shipping address |
+| __ship-address1__ | String      | Required | This is the street address that appears on the shipping address |
+| __ship-address2__ | String      | Required | This is the second line that appears on the shipping address |
+| __ship-city__ | String      | Required | This is the city that appears on the shipping address |
+| __ship-country__ | String      | Required | This is the country name that appears on the shipping address |
+| __ship-telephone__ | String      | Required | This is the phone number that appears on the shipping address |
+| __ship-fax__ | String      | Required | This is the fax number that appears on the shipping address |
+| __ship-email__ | String      | Required | This is the email address that appears on the shipping address |
+| __products__ | String      | Required | This is a comma separated list of products in the basket. It is in the form: product1:qty, product2:qty |
+
+
+Available URL query parameters (all compulsory)
+
+
+* email: the email of the customer placing the order
+* ship-firstname: the first name of the customer registered at the shipping address of the order
+* ship-lastname: the last name of the customer registered at the shipping address of the order
+* ship-fullname: the full name of the customer registered at the shipping address of the order
+* ship-company: the company name of the customer registered at the shipping address of the order
+* ship-address1: the street address of the customer registered at the shipping address of the order
+* ship-address2: the street address of the customer registered at the shipping address of the order
+* ship-city: the city of the customer registered at the shipping address of the order
+* ship-country: the country of the customer registered at the shipping address of the order
+* ship-telephone: the phone number of the customer registered at the shipping address of the order
+* ship-fax: the fax number of the customer registered at the shipping address of the order
+* ship-email: the email of the customer registered at the shipping address of the order
+* products: the list of products currently in the basket. This is a comma-separated list in the form productcode1:qty, productcode2:qty, …, productcoden:qty
+* time: this is the timestamp of the request
+* userid: this is the ID of the user making the request
+* hash: this is the hash code associated with the request
+
+##### Request
+
+**POST**
+
+/tax.json
+
+
+##### Response
+
+**HTTP /1.1 OK**
+
+```javascript
+{
+            "tax":10,
+            "basket":3,
+            "message":"200 OK",
+            "parameters":
+            {
+                        "email":"franclin.foping@nitrosell.net",
+                        "ship-firstname":"John",
+                        "ship-lastname":"John",
+                        "ship-fullname":"John Brooks",
+                        "ship-company":"",
+                        "ship-address1":"66 Bridge St Row",
+                        "ship-address2":"",
+                        "ship-city":"Chester",
+                        "ship-zippostcode":"CH1 1NN",
+                        "ship-state":"Cheshire",
+                        "ship-statecode":"UK",
+                        "ship-country":"United Kingdom",
+                        "ship-countrycode":"UK",
+                        "ship-telephone":"01244400318",
+                        "ship-fax":"01244400318",
+                        "ship-email":"franclin.foping@nitrosell.net",
+                        "products":"SM38MU34C:3,MK25CRS:1,MH86OL32E:1","time":"1354895083",
+                        "hash":"65b2f58926318c762f986784ba4a68ad",
+                        "userid":"50c2080e091f9"
+            },
+            "request":"POST"
+}
+```
+
+
+### Retrieve the amount of tax and shipping options applicable to a given order 
+
+The following table summarises the list of parameters for this endpoint
+
+Table 7: **GetShippingAndTaxForAnOrder** Request Fields
+
+| Field Name    | Data Type     | Usage | Description |
+| ------------- |:-------------:| ----- |:-----------:|
+| __hash__      | String        | Required | Please refer to the description provided in Table 1|
+| __userid__    | String        | Required | Please refer to the description provided in Table 1|
+| __time__      | Integer       | Required | Please refer to the description provided in Table 1|
+| __email__   | String        | Required | This is the email address of the customer you are looking for|
+| __ship-firstname__ | String      | Required | This is the first name that appears on the shipping address |
+| __ship-lastname__ | String      | Required | This is the last name that appears on the shipping address |
+| __ship-fullname__ | String      | Required | This is the full name that appears on the shipping address |
+| __ship-company__ | String      | Required | This is the company name that appears on the shipping address |
+| __ship-address1__ | String      | Required | This is the street address that appears on the shipping address |
+| __ship-address2__ | String      | Required | This is the second line that appears on the shipping address |
+| __ship-city__ | String      | Required | This is the city that appears on the shipping address |
+| __ship-country__ | String      | Required | This is the country name that appears on the shipping address |
+| __ship-telephone__ | String      | Required | This is the phone number that appears on the shipping address |
+| __ship-fax__ | String      | Required | This is the fax number that appears on the shipping address |
+| __ship-email__ | String      | Required | This is the email address that appears on the shipping address |
+| __products__ | String      | Required | This is a comma separated list of products in the basket. It is in the form: product1:qty, product2:qty |
+
+
+Available URL query parameters (all compulsory)
+
+
+* email: the email of the customer placing the order
+* ship-firstname: the first name of the customer registered at the shipping address of the order
+* ship-lastname: the last name of the customer registered at the shipping address of the order
+* ship-fullname: the full name of the customer registered at the shipping address of the order
+* ship-company: the company name of the customer registered at the shipping address of the order
+* ship-address1: the street address of the customer registered at the shipping address of the order
+* ship-address2: the street address of the customer registered at the shipping address of the order
+* ship-city: the city of the customer registered at the shipping address of the order
+* ship-country: the country of the customer registered at the shipping address of the order
+* ship-telephone: the phone number of the customer registered at the shipping address of the order
+* ship-fax: the fax number of the customer registered at the shipping address of the order
+* ship-email: the email of the customer registered at the shipping address of the order
+* products: the list of products currently in the basket. This is a comma-separated list in the form productcode1:qty, productcode2:qty, …, productcoden:qty
+* time: this is the timestamp of the request
+* userid: this is the ID of the user making the request
+* hash: this is the hash code associated with the request
+
+##### Request
+
+**POST**
+
+/shippingandtax.json
+
+
+##### Response
+
+**HTTP /1.1 OK**
+
+```javascript
+{
+            "tax":10,
+            "basket":3,
+            "shippingOptions":
+                        {
+                                    "163":
+                                                {
+                                                            "shipping_name":"Consolidated Messenger - Three Day",
+                                                            "shipping_integrationservicecode":"",
+                                                            "shipping_integrationcarriercode":"",
+                                                            "shipping_methodid":"2",
+                                                            "shipping_countryshippingid":"163",
+                                                            "shipping_charge":"0",
+                                                            "shipping_interpolate":"0"
+                                                            },
+                                                            "34":
+                                                                        {
+                                                                        "shipping_name":"Consolidated Messenger - Five Day",
+                                                                        "shipping_integrationservicecode":"",
+                                                                        "shipping_integrationcarriercode":"",
+                                                                        "shipping_methodid":"3",
+                                                                        "shipping_countryshippingid":"34",
+                                                                        "shipping_charge":"0",
+                                                                        "shipping_interpolate":"0"
+                                                                        },
+                                                            "181":
+                                                                        {
+                                                                        "shipping_name":"Consolidated Messenger - Overnight",
+                                                                        "shipping_integrationservicecode":"",
+                                                                        "shipping_integrationcarriercode":"",
+                                                                        "shipping_methodid":"1",
+                                                                        "shipping_countryshippingid":"181",
+                                                                        "shipping_charge":"15",
+                                                                        "shipping_interpolate":"0"
+                                                                        }                                                                                    
+                                                },
+                                    "message":"200 OK",
+                                    "parameters":{
+                                                "email":"franclin.foping@nitrosell.net",
+                                                "ship-firstname":"John",
+                                                "ship-lastname":"Jackson",
+                                                "ship-fullname":"John Jackson Brooks",
+                                                "ship-company":"",
+                                                "ship-address1":"66 Bridge St Row",
+                                                "ship-address2":"",
+                                                "ship-city":"Chester",
+                                                "ship-zippostcode":"CH1 1NN",
+                                                "ship-state":"Cheshire",
+                                                "ship-statecode":"UK",
+                                                "ship-country":"United Kingdom",
+                                                "ship-countrycode":"UK",
+                                                "ship-telephone":"01244400318",
+                                                "ship-fax":"01789204015",                                                                                                
+                                                "ship-email":"franclin.foping@nitrosell.net",
+                                                "products":"JWW003:3,JWW002:1,JWC001:1",
+                                                "time":"1360597347",
+                                                "userid":"511522521801a",
+                                                "hash":"727affc3d4dff6a01b25eccad22ac570"
+                                                },
+                                                "request":"POST"
+}
+```
+
+
+
+### Insert a Web Order into a WebStore 
+
+The following table summarises the list of parameters for this endpoint
+
+Table 8: __InsertWebOrder__ Request Fields
+
+| Field Name    | Data Type     | Usage | Description |
+| ------------- |:-------------:| ----- |:-----------:|
+| __hash__      | String        | Required | Please refer to the description provided in Table 1|
+| __userid__    | String        | Required | Please refer to the description provided in Table 1|
+| __time__      | Integer       | Required | Please refer to the description provided in Table 1|
+| __shippingid__ | Integer      | Required | This integer represents the shipping method used in this order|
+| __tenderid__   | Integer      | Required | This integer represents the tender type used in this order|
+|__cust-username__| String      | Required | This field represents the registered username of the customer placing the order| 
+|**cust-firstname**| String| Required | This is the firstname of the customer processing the transaction|
+|**cust-lastname**| String| Required | This is the lastname of the customer processing the transaction|
+|**cust-address1** |String| Required| This is the street address of the customer processing the transaction|
+| **cust-city** | String | Required | This is the name of the city of the  customer processing the transaction|
+| **cust-country** |String | Required | This is the country name of the customer processing the transaction|
+| **cust-zipppostcode** | String | Required | This is the zip code of the customer processing the transaction |
+| __email__   | String        | Required | This is the email address of the customer you are looking for|
+| __ship-firstname__ | String      | Required | This is the first name that appears on the shipping address |
+| __ship-lastname__ | String      | Required | This is the last name that appears on the shipping address |
+| __ship-fullname__ | String      | Required | This is the full name that appears on the shipping address |
+| __ship-company__ | String      | Required | This is the company name that appears on the shipping address |
+| __ship-address1__ | String      | Required | This is the street address that appears on the shipping address |
+| __ship-address2__ | String      | Required | This is the second line that appears on the shipping address |
+| __ship-city__ | String      | Required | This is the city that appears on the shipping address |
+| __ship-country__ | String      | Required | This is the country name that appears on the shipping address |
+| __ship-telephone__ | String      | Required | This is the phone number that appears on the shipping address |
+| __ship-fax__ | String      | Required | This is the fax number that appears on the shipping address |
+| __ship-email__ | String      | Required | This is the email address that appears on the shipping address |
+| __products__ | String      | Required | This is a comma separated list of products in the basket. It is in the form: product1:qty, product2:qty |
+
+
+
+##### Request
+
+**POST**
+
+/order.json
+
+
+##### Response
+
+**HTTP /1.1 OK**
+
+```javascript
+{
+            "message":"200 OK",
+            "parameters":
+            {
+                        "email":"franclin.foping@nitrosell.net",
+                        "cust-username":"tester",
+                        "cust-firstname":"Test",
+                        "cust-lastname":"Testing",
+                        "cust-address1":"10 White Friars",
+                        "cust-city":"Manchester",
+                        "cust-country":"United Kingdom",
+                        "cust-zippostcode":"M1 3EU",
+                        "ship-firstname":"John",
+                        "ship-lastname":"Brooks",
+                        "ship-fullname":"John Brooks",
+                        "ship-company":"",
+                        "ship-address1":"66 Bridge St Row",
+                        "ship-address2":"",
+                        "ship-city":"Chester",
+                        "ship-zippostcode":"CH1 1NN",
+                        "ship-state":"Cheshire",
+                        "ship-statecode":"UK",
+                        "ship-country":"United Kingdom",
+                        "ship-countrycode":"UK",
+                        "ship-telephone":"01244400318",
+                        "ship-fax":"01789204015",
+                        "ship-email":"franclin.foping@nitrosell.net",
+                        "products":"SM38MU34C:3,MK25CRS:1,MH86OL32E:1",
+                        "time":"1354876123",
+                        "shippingid":"175",
+                        "tenderid":"8",
+                        "hash":"53e05bb3d7f90ff1de3e270f17c71621",
+                        "userid":"50c229e511ab0"
+            },
+            "request":"POST"
 }
 ```
