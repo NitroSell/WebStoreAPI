@@ -694,3 +694,20 @@ Table 8: __InsertWebOrder__ Request Fields
             "request":"POST"
 }
 ```
+
+
+### Appendix: Error Codes Returned By the API
+
+The following error codes can be returned by the API to indicate that something went wrong somewhere. In the following tables, we will list and explain what each error means:
+
+
+Table 9: Error Codes
+
+
+
+| Codes    | Message     | Affected Resources | Description and Hints|
+| ------------- |:-------------:| ----- |:-----------:|
+|400 | Bad request  | All resources | Your request is malformed or missing some vital information. For instance, the supplied email address might not be valid or you did not specify a required parameter to the request.|
+|401 | Not Authorized | All resources | This error means that either the request has expired or the hash did not match or the provided User ID is no longer active and simply does not exist. If the hash does not match, the possible cause is that the private key is not valid|
+|404| Not Found | All resources | This error means that you are querying a resource that does not exist on our system. A typo might be at the heart of this issue. Double check your syntax and try again.|
+|405| Method Not allowed | All resources | This error means that you are attempting an operation that is not supported by that resource. For instance, you may be trying to a POST request on the __tender__ resource| 
