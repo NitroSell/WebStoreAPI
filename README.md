@@ -4,14 +4,15 @@ WebStoreAPI Documentation
 The API enables Web developers to integrate with retailers' Webstores to allow order import and customer insert from third-party platforms. It can also be used to perform a number of operations that are documented below. The API consists of eight endpoints which are detailed below:
 
 
-*     __GetCustomerDetails__: this endpoint allows you to retrieve the details of a customer given its email address;
-*     __GetAllTenders__: this endpoint allows you to get the list of available tenders for a given WebStore;
-*     __GetTendersByKeywords__: this endpoint allows to search for a particular tender given its keyword;
-*     __GetItem__: this endpoint allows you to retrieve a set of items given their characteristics. This could be their keywords, their department ID and so forth;
-*     __GetShippingOptions__: this endpoint allows you to query the list of possible shipping options of a given basket;
-*     __GetTaxForAnOrder__: this endpoint allows to get the applicable amount of tax for a given basket;
-*     __GetShippingAndTaxForAnOrder__: this endpoint is an aggregation of the previous two endpoints; it returns the applicable tax and the shipping options for a given basket;
-*     __InsertWebOrder__: this endpoint allows you to insert a given order into the WebStore.
+*     __GetCustomerDetails__: this call allows you to retrieve the details of a customer given its email address;
+*     __AddNewCustomer__ : this call entitles you to add a new customer to your Webstore;
+*     __GetAllTenders__: this call allows you to get the list of available tenders for a given WebStore;
+*     __GetTendersByKeywords__: this call allows to search for a particular tender given its keyword;
+*     __GetItem__: this call allows you to retrieve a set of items given their characteristics. This could be their keywords, their department ID and so forth;
+*     __GetShippingOptions__: this call allows you to query the list of possible shipping options of a given basket;
+*     __GetTaxForAnOrder__: this call allows to get the applicable amount of tax for a given basket;
+*     __GetShippingAndTaxForAnOrder__: this call is an aggregation of the previous two endpoints; it returns the applicable tax and the shipping options for a given basket;
+*     __InsertWebOrder__: this call allows you to insert a given order into the WebStore.
 
 
 ### Retrieve the details of a given customer
@@ -67,11 +68,74 @@ Available URL query parameters (all compulsory):
 }
 ```
 
+### Add a new customer to your Webstore
+
+The next table illustrates the parameters that will need to included as part of the call
+
+Table 2: **AddNewCustomer** Request fields
+
+| Field Name    | Data Type     | Usage | Description |
+| ------------- |:-------------:| ----- |:-----------:|
+| __hash__      | String        | Required | Please refer to the description provided in Table 1|
+| __userid__    | String        | Required | Please refer to the description provided in Table 1|
+| __time__      | Integer       | Required | Please refer to the description provided in Table 1|
+|__firstname__  | String        | Required | Your new customer's first name |
+|__lastname__   | String        | Required | Your new customer's last name  |
+|__company__    | String        | Optional | Your new customer's company |
+|__email__      | String        | Required | Your new customer's email address|
+|__address1__   | String        | Required | The street address of your new customer|
+|__address2__   | String        | Optional | The second line of the address of your new customer|
+|__city__       | String        | Required | The city associated to your new customer's address|
+|__zippostcode__   | String        | Required | Your new customer's zip code|
+|__country__   | String        | Required | The country associated to your new customer's address|
+|__state__   | String        | Required | The state associated to your new customer's address|
+|__phonenumber__   | Integer        | Required | Your new customer's phone number|
+|__faxnumber__   | Integer        | Optional | Your new customer's fax number|
+|__password__   | String        | Required | Your new customer's password|
+|__mailinglist__   | Boolean        | Required | Whether you want your new customer to be registered to your mailing list|
+
+
+* hash: the hash of the request. This is computed with your private key
+* userid: your user ID
+* time: the timestamp of the request
+
+##### Request
+
+**POST**
+
+/customer.json
+
+
+##### Response
+
+**HTTP /1.1 OK**
+
+```javascript
+{
+"customer_id":2,
+"customer_name":"",
+"customer_username":"0000002",
+"customer_address1":"36 Bridge St Row",
+"customer_address2":"",
+"customer_city":"Chester",
+"customer_state":"Cheshire",
+"customer_country":"United Kingdom",
+"status":200,
+"message":"200 OK",
+"parameters":     {"email":"annabel@myself.com",
+            "hash":"3d4e3e8f52cbc9795c27c9aa18218e06",
+            "userid":"50c2080e091f9",
+            "time":"1354893907"},
+"request":"POST"
+}
+```
+
+
 ### Retrieve the list of all supported tenders
 
 The following table summarises the list of parameters for this endpoint
 
-Table 2: **GetAllTenders** Request Fields
+Table 3: **GetAllTenders** Request Fields
 
 | Field Name    | Data Type     | Usage | Description |
 | ------------- |:-------------:| ----- |:-----------:|
@@ -157,7 +221,7 @@ Available URL query parameters (all compulsory)
 
 The following table summarises the list of parameters for this endpoint
 
-Table 3: **GetTendersByKeywords** Request Fields
+Table 4: **GetTendersByKeywords** Request Fields
 
 | Field Name    | Data Type     | Usage | Description |
 | ------------- |:-------------:| ----- |:-----------:|
@@ -216,7 +280,7 @@ Available URL query parameters (all compulsory)
 
 The following table summarises the list of parameters for this endpoint
 
-Table 4: **GetItem** Request Fields
+Table 5: **GetItem** Request Fields
 
 | Field Name    | Data Type     | Usage | Description |
 | ------------- |:-------------:| ----- |:-----------:|
@@ -280,7 +344,7 @@ N.B: *the departmentid, categoryid and price can be appended with the following 
 
 The following table summarises the list of parameters for this endpoint
 
-Table 5: **GetShippingOptions** Request Fields
+Table 6: **GetShippingOptions** Request Fields
 
 | Field Name    | Data Type     | Usage | Description |
 | ------------- |:-------------:| ----- |:-----------:|
@@ -401,7 +465,7 @@ Available URL query parameters (all compulsory)
 
 The following table summarises the list of parameters for this endpoint
 
-Table 6: **GetTaxForAnOrder** Request Fields
+Table 7: **GetTaxForAnOrder** Request Fields
 
 | Field Name    | Data Type     | Usage | Description |
 | ------------- |:-------------:| ----- |:-----------:|
@@ -490,7 +554,7 @@ Available URL query parameters (all compulsory)
 
 The following table summarises the list of parameters for this endpoint
 
-Table 7: **GetShippingAndTaxForAnOrder** Request Fields
+Table 8: **GetShippingAndTaxForAnOrder** Request Fields
 
 | Field Name    | Data Type     | Usage | Description |
 | ------------- |:-------------:| ----- |:-----------:|
@@ -613,7 +677,7 @@ Available URL query parameters (all compulsory)
 
 The following table summarises the list of parameters for this endpoint
 
-Table 8: __InsertWebOrder__ Request Fields
+Table 9: __InsertWebOrder__ Request Fields
 
 | Field Name    | Data Type     | Usage | Description |
 | ------------- |:-------------:| ----- |:-----------:|
@@ -701,7 +765,7 @@ Table 8: __InsertWebOrder__ Request Fields
 The following error codes can be returned by the API to indicate that something went wrong somewhere. In the following tables, we will list and explain what each error means:
 
 
-Table 9: Error Codes
+Table 10: Error Codes
 
 
 
