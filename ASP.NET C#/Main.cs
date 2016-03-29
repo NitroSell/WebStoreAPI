@@ -32,7 +32,7 @@ namespace SampleCode {
 
             
             NameValueCollection parameters = System.Web.HttpUtility.ParseQueryString(string.Empty);
-            parameters.Add("email", "franclin.foping@nitrosell.net");
+            parameters.Add("email", "YOUR EMAIL ADDRESS");
             parameters.Add("ship-firstname", "Jane");
             parameters.Add("ship-lastname", "Jane");
             parameters.Add("ship-fullname", "Jane Brook");
@@ -46,7 +46,7 @@ namespace SampleCode {
             parameters.Add("ship-country", "United Kingdom");
             parameters.Add("ship-telephone", "01244400318");
             parameters.Add("ship-fax", "01789204015");
-            parameters.Add("ship-email", "franclin.foping@nitrosell.net");
+            parameters.Add("ship-email", "YOUR EMAIL ADDRESS");
             parameters.Add("products", productString.Substring(0, productString.Length - 1));
             parameters.Add("time", timeStamp.ToString());
             parameters.Add("userid", objAPI.getUserID());
@@ -55,22 +55,22 @@ namespace SampleCode {
             //objAPI.getShippingOptions(parameters);
             //objAPI.getShippingAndTax(parameters);
             //objAPI.getTaxForAnOrder(parameters);
-            objAPI.getCustomerDetails("annabel@saintbelle.com");
+            objAPI.getCustomerDetails("YOUR CUSTOMER EMAIL");
            
             /**
              * Order details parameters 
              */
             NameValueCollection orderDetails = System.Web.HttpUtility.ParseQueryString(string.Empty);
-            orderDetails.Add("email", "franclin.foping@nitrosell.net");
+            orderDetails.Add("email", "YOUR EMAIL");
             orderDetails.Add("cust-username", "tester");
             orderDetails.Add("cust-lastname", "Testing");
-            orderDetails.Add("cust-address1", "10 White Friars");
+            orderDetails.Add("cust-address1", "ADDRESS LINE 1");
             orderDetails.Add("cust-city", "Manchester");
             orderDetails.Add("cust-country", "United Kingdom");
             orderDetails.Add("cust-zipppostcode", "M1 3EU");
-            orderDetails.Add("ship-firstname", "Jane");
-            orderDetails.Add("ship-lastname", "Jane");
-            orderDetails.Add("ship-fullname", "Jane Brook");
+            orderDetails.Add("ship-firstname", "FIRSTNAME");
+            orderDetails.Add("ship-lastname", "LAST NAME");
+            orderDetails.Add("ship-fullname", "FIRST AND LAST NAMES");
             orderDetails.Add("ship-company", "");
             orderDetails.Add("ship-address1", "36 Bridge St Row");
             orderDetails.Add("ship-address2", "");
@@ -79,9 +79,9 @@ namespace SampleCode {
             orderDetails.Add("ship-state", "Cheshire");
             orderDetails.Add("ship-statecode", "UK");
             orderDetails.Add("ship-country", "United Kingdom");
-            orderDetails.Add("ship-telephone", "01244400318");
-            orderDetails.Add("ship-fax", "01789204015");
-            orderDetails.Add("ship-email", "franclin.foping@nitrosell.net");
+            orderDetails.Add("ship-telephone", "PHONE NUMBER");
+            orderDetails.Add("ship-fax", "FAX NUMBER");
+            orderDetails.Add("ship-email", "YOUR EMAIL ADDRESS");
             orderDetails.Add("products", productString.Substring(0, productString.Length - 1));
             orderDetails.Add("time", timeStamp.ToString());
             orderDetails.Add("shippingid", "163");
