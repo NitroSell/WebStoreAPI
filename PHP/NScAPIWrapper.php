@@ -100,7 +100,7 @@ class NScAPIWrapper {
   * @return string the JSON encoded string containing the customer data
   */
  public function getCustomerDetails($email) {
-   $requestUrl = "https://api.internal.nitrosell.com/".$this->webstoreUrl."/v1/customer.json";
+   $requestUrl = "https://api.nitrosell.com/".$this->webstoreUrl."/v1/customer.json";
 
    $time = time();
 
@@ -123,7 +123,7 @@ class NScAPIWrapper {
   * @return string a JSON encoded array of the shipping options
   */
  public function getShippingOptions($postargs) {
-   $requestUrl = "https://api.internal.nitrosell.com/".$this->webstoreUrl."/v1/shipping.json";
+   $requestUrl = "https://api.nitrosell.com/".$this->webstoreUrl."/v1/shipping.json";
    
    $arrRawPostParameters = array();
    $arrParameters = array();
@@ -145,7 +145,7 @@ class NScAPIWrapper {
   * @return string the amount of tax in a JSON encoded string
   */
  public function getTaxForAnOrder($postargs) {
-   $requestUrl = "https://api.internal.nitrosell.com/".$this->webstoreUrl."/v1/tax.json";
+   $requestUrl = "https://api.nitrosell.com/".$this->webstoreUrl."/v1/tax.json";
    $arrRawPostParameters = array();
    $arrParameters = array();
    parse_str($postargs, $arrRawPostParameters);
@@ -166,7 +166,7 @@ class NScAPIWrapper {
   * @return string 
   */
  public function insertWebOrders($param) {
-   $requestUrl = "https://api.internal.nitrosell.com/".$this->webstoreUrl."/v1/order.json";
+   $requestUrl = "https://api.nitrosell.com/".$this->webstoreUrl."/v1/order.json";
    $arrRawPostParameters = array();
    $arrParameters = array();
    parse_str($param, $arrRawPostParameters);
@@ -186,7 +186,7 @@ class NScAPIWrapper {
   * @return string a JSON encoded string containing both the amount of tax and shipping options applicable to a basket
   */
  public function getShippingAndTax($postargs) {
-   $requestUrl = "https://api.internal.nitrosell.com/".$this->webstoreUrl."/v1/shippingandtax.json";
+   $requestUrl = "https://api.nitrosell.com/".$this->webstoreUrl."/v1/shippingandtax.json";
    $arrRawPostParameters = array();
    $arrParameters = array();
    parse_str($postargs, $arrRawPostParameters);
