@@ -24,8 +24,8 @@ class NScAPIWrapper
     @webstore = webstoreurl
     @userid = userid
     @key = key
-    @baseuri = 'http://api.internal.nitrosell.com/'
-    # or @baseuri = 'https://api.internal.nitrosell.com'
+    @baseuri = 'YOUR STORE URL'
+    # or @baseuri = 'https://api.nitrosell.com'
   end
   
   # This method return the details of the customer identified by email
@@ -109,14 +109,14 @@ end
 	
 
 objAPI = NScAPIWrapper.new('YOUR PRIVATE KEY', 'Your USER ID', 'YOUR WEBSTORE URL')
-objAPI.getCustomerDetails('annabel@saintbelle.com')
+objAPI.getCustomerDetails('YOUR CUSTOMER EMAIL ADDRESS')
 
 products = {'JWW003' => 1, 'JWW002' => 1, 'JWW001' => 1}
 
-parameters = {'email' => 'franclin.foping@nitrosell.net', 
-              'ship-firstname' => 'Jane',
-              'ship-lastname' => 'Jane',
-              'ship-fullname' => 'Jane Brook',
+parameters = {'email' => 'YOUR EMAIL ADDRESS', 
+              'ship-firstname' => 'FIRST NAME',
+              'ship-lastname' => 'LAST NAME',
+              'ship-fullname' => FULL NAME',
               'ship-company' => '',
               'ship-address1' => '36 Bridge St Row',
               'ship-address2' => '',
@@ -127,7 +127,7 @@ parameters = {'email' => 'franclin.foping@nitrosell.net',
               'ship-country' => 'United Kingdom',
               'ship-telephone' => '01244400318',
               'ship-fax' => '01789204015',
-              'ship-email' => 'franclin.foping@nitrosell.net',
+              'ship-email' => 'YOUR EMAIL ADDRESS',
               'products' => products.map{|k,v| "#{k}:#{v}"}.join(','),
               'time' => Time.now.to_i().to_s(),
               'userid' => objAPI.userid
@@ -139,16 +139,16 @@ parameters = {'email' => 'franclin.foping@nitrosell.net',
 
 # insert a web order
 orderDetails = {}
-orderDetails['email'] = 'franclin.foping@nitrosell.net'
+orderDetails['email'] = 'YOUR CUSTOMER EMAIL ADDRESS'
 orderDetails['cust-username'] = 'tester'
 orderDetails['cust-lastname'] = 'Testing'
 orderDetails['cust-address1'] = '10 White Friars'
 orderDetails['cust-city'] = 'Manchester'
 orderDetails['cust-country'] = 'United Kingdom'
 orderDetails['cust-zippostcode'] = 'M1 3EU'
-orderDetails['ship-firstname'] = 'Jane'
-orderDetails['ship-lastname'] = 'Jane'
-orderDetails['ship-fullname'] = 'Jane Brook'
+orderDetails['ship-firstname'] = 'FIRST NAME'
+orderDetails['ship-lastname'] = 'LAST NAME'
+orderDetails['ship-fullname'] = 'FULL NAME'
 orderDetails['ship-company'] = ''
 orderDetails['ship-address1'] = '36 Bridge St Row'
 orderDetails['ship-address2'] = ''
@@ -160,7 +160,7 @@ orderDetails['ship-country'] = 'United Kingdom'
 orderDetails['ship-countrycode'] = 'UK'
 orderDetails['ship-telephone'] = '01244400318'
 orderDetails['ship-fax'] = '01789204015'
-orderDetails['ship-email'] = 'franclin.foping@nitrosell.net'
+orderDetails['ship-email'] = 'CUSTOMER EMAIL ADDRESS'
 orderDetails['products'] = products.map{|k,v| "#{k}:#{v}"}.join(',')
 orderDetails['time'] = Time.now.to_i().to_s()
 orderDetails['shippingid'] = '163'
