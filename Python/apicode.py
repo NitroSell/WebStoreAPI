@@ -33,7 +33,7 @@ class NScAPIWrapper:
         # which means that you should compile you should compile the socket module with the SSL support
         # having done that, all you need to do to avail of the secure connection is to uncomment the next line and comment the line after the next
         #self.connection = httplib.HTTPSConnection('api.internal.nitrosell.com')
-        self.connection = httplib.HTTPConnection('api.internal.nitrosell.com')
+        self.connection = httplib.HTTPConnection('YOUR STORE URL')
 
     ##
     # This method returns the user ID
@@ -149,7 +149,7 @@ class NScAPIWrapper:
 # 2 - the user ID
 # 3 - the URI of the webstore on which you are making the request
 
-APICalls = NScAPIWrapper('df5e8c6c2cb42e2447de4b4f6e4c39ef', '511522521801a', 'franclin20.internal.nitrosell.com')
+APICalls = NScAPIWrapper('df5e8c6c2cb42e2447de4b4f6e4c39ef', '511522521801a', 'YOUR STORE URL')
 
 
 # Here you define the items that are in your basket
@@ -171,10 +171,10 @@ for key, value in products.iteritems():
 
 # parameters is a dictionary describing the basket
 parameters = {}
-parameters['email'] = 'franclin.foping@nitrosell.net'
-parameters['ship-firstname'] = 'Jane'
-parameters['ship-lastname'] = 'Jane'
-parameters['ship-fullname'] = 'Jane Brook'
+parameters['email'] = 'YOUR EMAIL ADDRESS'
+parameters['ship-firstname'] = 'FIRST NAME'
+parameters['ship-lastname'] = 'LAST NAME'
+parameters['ship-fullname'] = 'FULL NAME'
 parameters['ship-company'] = ''
 parameters['ship-address1'] = '36 Bridge St Row'
 parameters['ship-address2'] = ''
@@ -185,7 +185,7 @@ parameters['ship-statecode'] = 'UK'
 parameters['ship-country'] = 'United Kingdom'
 parameters['ship-telephone'] = '01244400318'
 parameters['ship-fax'] = '01789204015'
-parameters['ship-email'] = 'franclin.foping@nitrosell.net'
+parameters['ship-email'] = 'CUSTOMER EMAIL ADDRESS'
 parameters['products'] = productString[:-1] # the slicing is used to strip the trailing comma
 parameters['time'] = int(time.time())
 parameters['userid'] = APICalls.getUserID()
@@ -220,16 +220,16 @@ APICalls.getCustomerDetails(email)
 
 # the orderDetails dictionary holds the necessary details to insert an order into the WebStore
 orderDetails = {}
-orderDetails['email'] = 'franclin.foping@nitrosell.net'
+orderDetails['email'] = 'EMAIL ADDRESS'
 orderDetails['cust-username'] = 'tester'
 orderDetails['cust-lastname'] = 'Testing'
 orderDetails['cust-address1'] = '10 White Friars'
 orderDetails['cust-city'] = 'Manchester'
 orderDetails['cust-country'] = 'United Kingdom'
 orderDetails['cust-zippostcode'] = 'M1 3EU'
-orderDetails['ship-firstname'] = 'Jane'
-orderDetails['ship-lastname'] = 'Jane'
-orderDetails['ship-fullname'] = 'Jane Brook'
+orderDetails['ship-firstname'] = 'FIRST NAME'
+orderDetails['ship-lastname'] = 'LAST NAME'
+orderDetails['ship-fullname'] = 'FULL NAME'
 orderDetails['ship-company'] = ''
 orderDetails['ship-address1'] = '36 Bridge St Row'
 orderDetails['ship-address2'] = ''
@@ -241,7 +241,7 @@ orderDetails['ship-country'] = 'United Kingdom'
 orderDetails['ship-countrycode'] = 'UK'
 orderDetails['ship-telephone'] = '01244400318'
 orderDetails['ship-fax'] = '01789204015'
-orderDetails['ship-email'] = 'franclin.foping@nitrosell.net'
+orderDetails['ship-email'] = 'EMAIL ADDRESS'
 orderDetails['products'] = productString[:-1] # the slicing is used to strip the trailing comma
 orderDetails['time'] = int(time.time())
 orderDetails['shippingid'] = '163'
