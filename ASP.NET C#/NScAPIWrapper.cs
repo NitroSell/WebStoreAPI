@@ -78,7 +78,7 @@ namespace SampleCode
 
             parameters.Add("hash",ByteToString(this._hmacmd5.Hash));
 
-            HttpWebRequest request = (HttpWebRequest) WebRequest.Create("http://api.internal.nitrosell.com/" + this._webstoreUrl + "/v1/"+action+".json");
+            HttpWebRequest request = (HttpWebRequest) WebRequest.Create("http://api.nitrosell.com/" + this._webstoreUrl + "/v1/"+action+".json");
             request.Method = "POST";
             
             string postData = parameters.ToString();
@@ -139,7 +139,7 @@ namespace SampleCode
             var messageBytes = encoding.GetBytes(message);
 
             this._hmacmd5.ComputeHash(messageBytes);
-            HttpWebRequest request = (HttpWebRequest) WebRequest.Create("http://api.internal.nitrosell.com/" + this._webstoreUrl + "/v1/customer.json?email=" + email + "&hash=" + ByteToString(this._hmacmd5.Hash) + "&userid=" + this._userid + "&time=" + (long)time.TotalSeconds);
+            HttpWebRequest request = (HttpWebRequest) WebRequest.Create("http://api.nitrosell.com/" + this._webstoreUrl + "/v1/customer.json?email=" + email + "&hash=" + ByteToString(this._hmacmd5.Hash) + "&userid=" + this._userid + "&time=" + (long)time.TotalSeconds);
 
             request.UserAgent = "Mozilla/5.0";
             request.Method = "GET";
