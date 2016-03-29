@@ -93,7 +93,7 @@ public class NScAPIWrapper {
     parameters.put("hash", hmac);
 
     try {
-      this._url = new URL("http://api.internal.nitrosell.com/" + this._webstoreUrl + "/v1/"+ action +".json");
+      this._url = new URL("http://api.nitrosell.com/" + this._webstoreUrl + "/v1/"+ action +".json");
       _connection = (HttpURLConnection) _url.openConnection();
       _connection.setRequestMethod("POST");
       _connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
@@ -193,7 +193,7 @@ public class NScAPIWrapper {
         hmac = "0" + hmac;
       }
 
-      this._url = new URL("http://api.internal.nitrosell.com/" + this._webstoreUrl + "/v1/customer.json" + "?email=" + email + "&hash=" + hmac + "&userid=" + this._userid + "&time=" + timestamp);
+      this._url = new URL("http://api.nitrosell.com/" + this._webstoreUrl + "/v1/customer.json" + "?email=" + email + "&hash=" + hmac + "&userid=" + this._userid + "&time=" + timestamp);
       this._connection = (HttpURLConnection) _url.openConnection();
 
       InputStream is = this._connection.getInputStream();
