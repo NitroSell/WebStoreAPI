@@ -10,8 +10,11 @@ The API enables Web developers to integrate with retailers' Webstores to allow o
 *     __GetTendersByKeywords__: this call allows to search for a particular tender given its keyword;
 *     __GetItem__: this call allows you to retrieve a set of items given their characteristics. This could be their keywords, their department ID and so forth;
 *     __GetShippingOptions__: this call allows you to query the list of possible shipping options of a given basket;
-*     __GetTaxForAnOrder__: this call allows to get the applicable amount of tax for a given basket;
+*     __GetTaxForAnOrder__: this call allows you to get the applicable amount of tax for a given basket;
 *     __GetShippingAndTaxForAnOrder__: this call is an aggregation of the previous two endpoints; it returns the applicable tax and the shipping options for a given basket;
+*     __GetReviews__: this call allows you to fetch all the users' reviews or a specific one;
+*     __GetBasketContent__: this call allows you to get the content of the shopping cart given its cookie ID;
+*     __Ping__: this call allows you to check the validity of your credentials;
 *     __InsertWebOrder__: this call allows you to insert a given order into the WebStore.
 
 
@@ -671,7 +674,108 @@ Available URL query parameters (all compulsory)
 }
 ```
 
+### Retrieve the users' reviews
 
+The following table summarises the list of parameters for this endpoint
+
+Table : **GetReviews** Request Fields
+
+| Field Name    | Data Type     | Usage | Description |
+| ------------- |:-------------:| ----- |:-----------:|
+| __hash__      | String        | Required | Please refer to the description provided in Table 1|
+| __userid__    | String        | Required | Please refer to the description provided in Table 1|
+| __time__      | Integer       | Required | Please refer to the description provided in Table 1|
+| __productreview_id__ | integer      | Optional | This is the ID of the reviewed to be retrieved, if omitted, all the reviews are returned |
+
+
+
+
+##### Request
+
+**GET**
+
+/review.json?productreview_id=10&hash=2683824d2af315d1022e2ea2dca21ee1&userid=50c2080e091f9&time=1354893907/
+
+
+##### Response
+
+**HTTP /1.1 OK**
+
+```javascript
+{
+            "productreview":
+            {
+              product review           
+              },
+            "request":"GET"
+}
+```
+
+### Ping to check your credentials
+
+The following table summarises the list of parameters for this endpoint.
+Please note than under no circumstances you should pass your credentials as this is a GET request.
+
+Table : **Ping** Request Fields
+
+| Field Name    | Data Type     | Usage | Description |
+| ------------- |:-------------:| ----- |:-----------:|
+| __hash__      | String        | Required | Please refer to the description provided in Table 1|
+| __userid__    | String        | Required | Please refer to the description provided in Table 1|
+| __time__      | Integer       | Required | Please refer to the description provided in Table 1|
+
+##### Request
+
+**GET**
+
+/ping.json?hash=2683824d2af315d1022e2ea2dca21ee1&userid=50c2080e091f9&time=1354893907/
+
+
+##### Response
+
+**HTTP /1.1 OK**
+
+```javascript
+{
+            "credentialsok":
+            "request":"GET"
+}
+```
+
+
+### Retrieve the basket content given its cookie ID (advanced)
+All your users are uniquely identified by a session ID which is stored in their browser. This API call gives you the opportunity to leverage that and get the content of their basket. For geeks, this is actually equivalent to performing a JSONP call to our server and you specify a callback that will use the basket content.
+
+The following table summarises the list of parameters for this endpoint
+
+Table : **GetBasketContent** Request Fields
+
+| Field Name    | Data Type     | Usage | Description |
+| ------------- |:-------------:| ----- |:-----------:|
+| __hash__      | String        | Required | Please refer to the description provided in Table 1|
+| __userid__    | String        | Required | Please refer to the description provided in Table 1|
+| __time__      | Integer       | Required | Please refer to the description provided in Table 1|
+| __sessid__ | hash      | required | This is the session ID of your user |
+| __callback__ | string      | required | This is the function that will be called when the call is executed |
+
+
+##### Request
+
+**GET**
+
+/basket.json?callback='myfunction'&sessid=bu5515adv&hash=2683824d2af315d1022e2ea2dca21ee1&userid=50c2080e091f9&time=1354893907/
+
+
+##### Response
+
+**HTTP /1.1 OK**
+
+```javascript
+myfunction({
+            // whatever your function is meant to do
+  
+})
+```
 
 ### Insert a Web Order into a WebStore 
 
