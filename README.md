@@ -294,7 +294,8 @@ Table 5: **GetItem** Request Fields
 | departmentid  | Integer      | Optional | This indicates the department ID of the items to be fetched |
 | categoryid   | Integer      | Optional | This indicates the category ID of the items to be fetched |
 | price   | Integer      | Optional | This indicates the price of the items to be fetched |
-
+| sort      | Integer       | Optional | The current page of the dataset, default to 0, that is the first page|
+| count      | Integer       | Optional | The number of records to be returned, default to the number of items shown per page on your store|
 Available URL query parameters (all compulsory)
 
 
