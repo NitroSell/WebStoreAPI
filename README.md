@@ -290,7 +290,7 @@ Table 5: **GetItem** Request Fields
 | __hash__      | String        | Required | Please refer to the description provided in Table 1|
 | __userid__    | String        | Required | Please refer to the description provided in Table 1|
 | __time__      | Integer       | Required | Please refer to the description provided in Table 1|
-|__keywords__   | String        | Optional | This indicates the keyword of the tender. If you don’t provide one, all the tenders will be returned.|
+|__keyword__    | String        | Optional | Keyword to be used for the search|
 | departmentid  | Integer      | Optional | This indicates the department ID of the items to be fetched |
 | categoryid   | Integer      | Optional | This indicates the category ID of the items to be fetched |
 | price   | Integer      | Optional | This indicates the price of the items to be fetched |
