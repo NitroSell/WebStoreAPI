@@ -4,19 +4,24 @@ WebStoreAPI Documentation
 The API enables Web developers to integrate with retailers' Webstores to allow order import and customer insert from third-party platforms. It can also be used to perform a number of operations that are documented below. The API consists of eight endpoints which are detailed below:
 
 
-*     __GetCustomerDetails__: this call allows you to retrieve the details of a customer given its email address;
-*     __AddNewCustomer__ : this call entitles you to add a new customer to your Webstore;
-*     __GetAllTenders__: this call allows you to get the list of available tenders for a given WebStore;
-*     __GetTendersByKeywords__: this call allows to search for a particular tender given its keyword;
-*     __GetItem__: this call allows you to retrieve a set of items given their characteristics. This could be their keywords, their department ID and so forth;
-*     __GetShippingOptions__: this call allows you to query the list of possible shipping options of a given basket;
-*     __GetTaxForAnOrder__: this call allows you to get the applicable amount of tax for a given basket;
-*     __GetShippingAndTaxForAnOrder__: this call is an aggregation of the previous two endpoints; it returns the applicable tax and the shipping options for a given basket;
-*     __GetReviews__: this call allows you to fetch all the users' reviews or a specific one;
-*     __GetBasketContent__: this call allows you to get the content of the shopping cart given its cookie ID;
-*     __Ping__: this call allows you to check the validity of your credentials;
-*     __InsertWebOrder__: this call allows you to insert a given order into the WebStore.
+*     GetCustomerDetails: this call allows you to retrieve the details of a customer given its email address;
+*     AddNewCustomer: this call entitles you to add a new customer to your Webstore;
+*     GetAllTenders: this call allows you to get the list of available tenders for a given WebStore;
+*     GetTendersByKeywords: this call allows to search for a particular tender given its keyword;
+*     GetItem: this call allows you to retrieve a set of items given their characteristics. This could be their keywords, their department ID and so forth;
+*     GetShippingOptions: this call allows you to query the list of possible shipping options of a given basket;
+*     GetTaxForAnOrder: this call allows you to get the applicable amount of tax for a given basket;
+*     GetShippingAndTaxForAnOrder: this call is an aggregation of the previous two endpoints; it returns the applicable tax and the shipping options for a given basket;
+*     GetReviews: this call allows you to fetch all the users' reviews or a specific one;
+*     GetBasketContent: this call allows you to get the content of the shopping cart given its cookie ID;
+*     Ping: this call allows you to check the validity of your credentials;
+*     InsertWebOrder: this call allows you to insert a given order into the WebStore.
+*     GetWebOrders: this call retrieves the new orders from your stores and sets them to DOWNLOADED
 
+### Authentication
+In order to submit those API calls, you will need to pass our authentication process. There are two ways to do so:
+* By sending the HMAC hash of the data that you are sending using your private key;
+* Or, by leveraging the HTTP Basic Authentication mechanism. You will need to use your NSc Sync credentials for that.
 
 ### Retrieve the details of a given customer
 
@@ -864,6 +869,180 @@ Table 9: __InsertWebOrder__ Request Fields
 }
 ```
 
+### GetWebOrders
+Download all the new orders that you have or a specific order. It should be noted that after downloading an order, its order status will be set to DOWNLOADED. Remember that NSc Sync only downloads NEW orders. 
+
+Table 10: __GetWebOrders__ Request Fields
+
+| Field Name    | Data Type     | Usage | Description |
+| ------------- |:-------------:| ----- |:-----------:|
+| __ordernumber__ | String      | Optional | This is the order number to be downloaded|
+| __start__ | String      | Optional | This is the time up to which the orders are to be downloaded. By default it's set to the current timestamp |
+| __status__ | String      | Optional | This is the status of the orders to be downloaded (NEW, COMPLETE, DOWNLOADED, UNSHIPPED, REFUNDED). By default, it is set to NEW |
+
+##### Request
+
+**GET**
+
+/order.json
+
+##### Response
+```json
+{
+  "count": 1,
+  "orders": [
+    {
+      "Order": {
+        "@domain": "mystoredomain.nitrosell.com",
+        "@currencysymbol": "$",
+        "@currency": "1",
+        "@id": "WebOrder #1491920002",
+        "Options": {
+          "Option": [
+            {
+              "@name": "edition",
+              "$": "RMSSO"
+            },
+            {
+              "@name": "taxmodule",
+              "$": "RMSByItem"
+            },
+            {
+              "@name": "shippingbyitem",
+              "$": "YES"
+            },
+            {
+              "@name": "shippingbyitemtaxid",
+              "$": "2"
+            }
+          ]
+        },
+        "NumericTime": "1491920002",
+        "OriginatingIP": "10.0.3.93",
+        "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:49.0) Gecko/20100101 Firefox/49.0",
+        "AddressInfo": [
+          {
+            "@type": "ship",
+            "@userlocalfield": "AccountNumber",
+            "@userremotefield": "Account",
+            "Name": {
+              "Title": "Mr",
+              "First": "John",
+              "Last": "Doe",
+              "Full": "John Doe"
+            },
+            "Company": "J&s Outdoors",
+            "Address1": "1127 Windiate St",
+            "Account": "testuser",
+            "CustomText5": "blabla",
+            "Address2": [],
+            "City": "Manitowoc",
+            "State": "WI",
+            "Country": "United States",
+            "Zip": "54220-2706",
+            "Phone": "4083807204",
+            "TaxExempt": "0",
+            "Fax": [],
+            "Email": "myemail@mymailserver.com"
+          },
+          {
+            "@type": "bill",
+            "@userlocalfield": "AccountNumber",
+            "@userremotefield": "Account",
+            "Name": {
+              "Title": "Mr",
+              "First": "John",
+              "Last": "Doe",
+              "Full": "John Doe"
+            },
+            "Company": "J&s Outdoors",
+            "Address1": "1127 Windiate St",
+            "Account": "nitrotest",
+            "CustomText5": "password",
+            "Address2": [],
+            "City": "Manitowoc",
+            "State": "WI",
+            "Country": "United States",
+            "Zip": "54220-2706",
+            "Phone": "4083807204",
+            "TaxExempt": "0",
+            "Fax": [],
+            "Email": "myemail@mymailserver.com"
+          }
+        ],
+        "Shipping": {
+          "@id": "15",
+          "$": "RM - Special Delivery - Free Delivery"
+        },
+        "CreditCard": {
+          "@amount": "5.32",
+          "@tenderid": "15",
+          "@cctype": "Visa",
+          "@cclastdigits": "1111",
+          "@expiration": "ENCRYPTED:+HqaLlblevB/mgOIOb8gQw==",
+          "$": "ENCRYPTED:D7LHWyKgDcBCXZCzRIbZsg=="
+        },
+        "Comments": [
+          {
+            "@WindowTitle": "WARNING: CARD DETAILS REMOVED FOR PCI-DSS COMPLIANCE"
+          },
+          {
+            "@WindowTitle": "Test Order Notification",
+            "$": "NOTICE! This order was placed in test mode. No transfer of funds have taken place!"
+          },
+          {
+            "@WindowTitle": "Shipping Date",
+            "$": "SHIP 04/12/2017"
+          },
+          {
+            "@WindowTitle": "Comments from Customer",
+            "$": "THIS IS NOT A REAL ORDER! THIS IS A NITROSELL TEST ORDER PLEASE IGNORE! SHIP 04/12/2017"
+          }
+        ],
+        "OrderVersion": "4",
+        "Item": {
+          "@num": "1",
+          "@taxid": "2",
+          "Id": "4112",
+          "Code": "macoun",
+          "Quantity": "1",
+          "Unit-Price": "5.32",
+          "Unit-Tax": "0.89",
+          "Tax-Code": "00000",
+          "Description": "King Lucious",
+          "Group": [],
+          "Taxable": "YES"
+        },
+        "Total": {
+          "Line": [
+            {
+              "@name": "Subtotal",
+              "@type": "Subtotal",
+              "$": "5.32"
+            },
+            {
+              "@name": "Shipping",
+              "@type": "Shipping",
+              "$": "0"
+            },
+            {
+              "@name": "Tax",
+              "@type": "Tax",
+              "$": "0.89"
+            },
+            {
+              "@name": "Total",
+              "@type": "Total",
+              "$": "5.32"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
+
+```
 
 ### Appendix: Error Codes Returned By the API
 
