@@ -871,6 +871,7 @@ Table 9: __InsertWebOrder__ Request Fields
 
 ### GetWebOrders
 Download all the new orders that you have or a specific order. It should be noted that after downloading an order, its order status will be set to DOWNLOADED. Remember that NSc Sync only downloads NEW orders. 
+*Please kindly note that as of October 12, 2017 this endpoint is only available on version alpha and beta.*
 
 Table 10: __GetWebOrders__ Request Fields
 
