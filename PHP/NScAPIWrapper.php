@@ -1,7 +1,7 @@
 <?php
 /**
  * This class implements the different endpoints as documented
- * @author Franclin <franclin.foping@nitrosell.net>
+ * @author Franclin
  * 
  */
 class NScAPIWrapper {
@@ -12,6 +12,8 @@ class NScAPIWrapper {
   private $responseInfo = array(); ///< This array will be used to store the response from curl   
   private $user_agent = null; ///< This variable will contain the user agent description 
   private $webstoreUrl = null; ///< This variable will contain the URL of the WebStore
+  private $sSyncUsername = ''; ///< This variable will contain the Sync username
+  private $sSyncPassword = ''; ///< This variable will contain the Sync password
 
   /**
    * This is the constructor of our class. Its job is to set the member variable to their correct values
@@ -19,12 +21,13 @@ class NScAPIWrapper {
    * @param type $userid  This variable will hold the user ID
    * @param type $webstoreUrl  This variable will contain the URL of the WebStore
    */
-  public function __construct($key, $userid, $webstoreUrl) {
+  public function __construct($key, $userid, $webstoreUrl, $sSyncUsername = '', $sSyncPassword = '') {
     $this->sKey = $key;
     $this->sUserID = $userid;
     $this->webstoreUrl = $webstoreUrl;
-
     $this->user_agent = "Testing user agent";
+    $this->sSyncUsername = $sSyncUsername;
+    $this->sSyncPassword = $sSyncPassword;
   }
 
   /**
@@ -62,10 +65,15 @@ class NScAPIWrapper {
 
       $arrPostData = implode("&", $arrPostData);
 
+      // Adding Basic authentication support if the hash isn't available as a parameter
+      if (!in_array('hash', array_keys($postargs)) && !empty($this->sSyncUsername) && !empty($this->sSyncPassword)) {
+        curl_setopt($ch, CURLOPT_USERPWD, sprintf('%s:%s', $this->sSyncUsername, $this->sSyncPassword));
+      }
+      
       // setting options for curl
       curl_setopt($ch, CURLOPT_POST, true);
       curl_setopt($ch, CURLOPT_POSTFIELDS, $arrPostData);
-      curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/x-www-form-urlencoded'));//, 'Content-length: 100'));
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/x-www-form-urlencoded'));
     }
 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -155,6 +163,19 @@ class NScAPIWrapper {
    }
    
    $arrParameters['hash'] = hash_hmac("md5", join(".", $arrParameters), $this->sKey);
+   
+   return $this->processRequest($requestUrl, $arrParameters);
+ }
+ 
+ public function updateProducts($postargs) {
+   $requestUrl = "https://api.nitrosell.com/".$this->webstoreUrl."/v1/products.json";
+   $arrRawPostParameters = array();
+   $arrParameters = array();
+   parse_str($postargs, $arrRawPostParameters);
+
+   foreach ($arrRawPostParameters as $key => $value) {
+     $arrParameters[$key] = urldecode($value);
+   }
    
    return $this->processRequest($requestUrl, $arrParameters);
  }

@@ -5,7 +5,7 @@
  */
 require_once 'NScAPIWrapper.php';
 
-$objAPI = new NScAPIWrapper("YOUR PRIVATE KEY", "YOUR USER ID", "YOUR WEBSTORE URL");
+$objAPI = new NScAPIWrapper("YOUR PRIVATE KEY", "YOUR USER ID", "YOUR WEBSTORE URL", "YOUR SYNC USERNAME", "YOUR SYNC PASSWORD");
 
 
 echo $objAPI->getCustomerDetails("you@domain.com").PHP_EOL;
@@ -78,5 +78,19 @@ $arrOrderParameters = array(
 );
 
 //echo $objAPI->insertWebOrders(http_build_query($arrOrderParameters)).PHP_EOL;
+
+// We update a given product with new stock, code, name, and price.
+$arrOrderParameters = array(
+  array(
+    "product_id" => 1, // please ensure that this product ID corresponds to the actual product to be updated
+    "product_stock" => 100,
+    "product_code" => "New SKU",
+    "product_name" => "New prod name",
+    "product_price" => 10,
+  )
+);
+
+// uncomment the line below to test products updating
+//echo $objAPI->updateProducts(http_build_query($arrOrderParameters)).PHP_EOL;
 
 ?>
