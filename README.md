@@ -23,6 +23,69 @@ In order to submit those API calls, you will need to pass our authentication pro
 * By sending the HMAC hash of the data that you are sending using your private key;
 * Or, by leveraging the HTTP Basic Authentication mechanism. You will need to use your NSc Sync credentials for that.
 
+### Quickstart
+Best way to start is to call the GET ping.json to verify connection.
+
+You need to have your NSc Webstore Credentials ready. 
+
+These can be found in an email titled: `"NSc Sync WebStore credentials for <Your Webstore URL>"`.
+            
+For example:
+
+- NSc Sync Webstore URL: maciej.demostore.nitrosell.com
+- NSc Sync Username: maciejdemostor
+- NSc Sync Password: XXXXXXXXXX
+            
+Next, you can base64 encode your username and password in terminal:
+            
+`echo -n "<NSc Sync Username>:<NSc Sync Password>" | base64`
+
+For example:
+
+`echo -n "maciejdemostor:XXXXXXXXXX" | base64`
+
+Copy the output and replace it in the curl call below:
+
+`curl -w '%{http_code}\n' -H 'Authorization: Basic <Base64 Encoded Credentials>' https://api.nitrosell.com/<Webstore URL>/v1/ping.json`
+
+For example:
+
+`curl -w '%{http_code}\n' -H 'Authorization: Basic bWFjaWVqZGVtb3N0b3I6WFhYWFhYWFhYWA==' https://api.nitrosell.com/maciej.demostore.nitrosell.com/v1/ping.json`
+
+If the request is successfull, your response will be:
+
+`{"message":"hello World","time":"Wed, 25 May 2022 17:38:43 +0000","data":[]}
+200`
+
+If your credentials are wrong, your response will be:
+
+`{"error":"Unable to login"}401`
+
+Once connection is verified, you can use the same format for working with other API calls.
+
+PHP Example:
+
+```
+$curl      = curl_init();
+$sUsername = "<NSc Sync Username>"; // i.e. "maciejdemostor"
+$sPassword = "<NSc Sync Password>"; // i.e. "XXXXXXXXXX"
+ 
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'https://api.nitrosell.com/<NSc Sync Webstore URL>/v1/ping.json', // i.e. 'https://api.nitrosell.com/maciej.demostore.nitrosell.com/v1/ping.json'
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'GET',
+  CURLOPT_HTTPHEADER => array(
+    'Authorization: Basic ' . base64_encode(sprintf('%s:%s', $sUsername, $sPassword))
+  ),
+));
+ 
+$response = curl_exec($curl);
+curl_close($curl);
+```
+
 ### Retrieve the details of a given customer
 
 The following table summarises the list of parameters for this endpoint
