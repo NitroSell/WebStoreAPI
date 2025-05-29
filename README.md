@@ -378,7 +378,7 @@ N.B: *the departmentid, categoryid and price can be appended with the following 
 
 **GET**
 
-/item.json?keyword=tie&hash=2683824d2af315d1022e2ea2dca21ee1&userid=50c2080e091f9&time=1354893907/
+/products.json?keyword=tie&hash=2683824d2af315d1022e2ea2dca21ee1&userid=50c2080e091f9&time=1354893907/
 
 
 ##### Response
